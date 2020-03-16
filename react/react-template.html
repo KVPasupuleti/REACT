@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Including React libraries -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <title>ReactJS</title>
+    
+    <style>
+      .userName {
+        font-size: 30px;
+        font-family: arial;
+      }
+      
+      #userName {
+        color: red;
+        background-color: grey;
+      }
+    </style>
+    
+  </head>
+
+  <body id="console-root">
+    <script src="https://tap.ibhubs.in/utils/console.js"></script>
+
+    <div id="root"></div>
+    
+    <!--
+        Write your HTML code here
+    -->
+
+    <script type="text/babel">
+
+class Notification extends React.Component {
+  constructor(props) {
+      super(props);
+  }
+  
+  render() {
+    const noOfunreadMessages = this.props.unreadMessages.length;
+    return(
+      <div>
+        {noOfunreadMessages > 0 &&
+          <h2>You have {noOfunreadMessages} unread messages.</h2>
+        }
+        </div>
+      );
+  }
+}
+
+
+
+const messages = ["Hello", "Ram : Hey There"];
+
+ReactDOM.render(<Notification unreadMessages={messages}/>, document.getElementById("root"));
+
+
+/*
+
+
+function LoginButton(props) {
+  return(
+    <button onClick={props.onClick}>
+    Login
+    </button>
+  );
+}
+
+function LogoutButton(props) {
+  return(
+    <button onClick={props.onClick}>
+     Logout
+    </button>
+  );
+}
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn : false};
+  }
+  
+  handleLoginClick() {
+    this.setState({isLoggedIn : true});
+  }
+  handleLogoutClick() {
+this.setState({isLoggedIn : false})
+  }
+  
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if(isLoggedIn) {
+    button = <LogoutButton onClick={this.handleLogoutClick}/>
+    }
+    else {
+     button =  <LoginButton onClick={this.handleLoginClick}/>
+    }
+  return(
+    <div>
+      {button}
+    </div>
+  );
+  }
+}
+
+
+ReactDOM.render(<LoginControl/>, document.getElementById("root"));
+
+*/
+
+
+/*
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn : false};
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  handleClick() {
+    this.setState((state) => ({isToggleOn : !state.isToggleOn}));
+    console.log(this.state.isToggleOn);
+  }
+  
+  render() {
+    return(
+      <div>
+      <button className="toggle-button"  onClick={this.handleClick}>
+      Toggle State
+      </button>
+      <h1>{this.state.isToggleOn?"ON":"OFF"}</h1>
+      </div>
+      );
+  }
+}
+
+*/
+
+/*
+
+function ActionLink() {
+  function HandleClick(e) {
+    e.preventDefault();
+    console.log(1);
+  }
+  
+  return(
+    <a href="www.google.com" onClick={HandleClick}>Click Me</a>
+  );
+}
+
+ReactDOM.render(<ActionLink/>, document.getElementById("root"));
+
+*/
+
+/*
+  
+class UpdateState extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value : 1};
+  }
+  
+  componentDidMount() {
+    //setInterval(() => {
+      this.update()
+      this.update1()
+    //}, 1000)
+  }
+  
+  update() {
+    this.setState({value : this.state.value + 1});
+  }
+  
+  update1() {
+    this.setState({value : this.state.value + 2});
+  }
+  
+  render() {
+    return(
+      <div className="value">
+      {this.state.value}
+      </div>
+      );
+  }
+}
+    
+ReactDOM.render(<UpdateState/>, document.getElementById("root"));
+
+*/
+
+//TICKING CLOCK
+
+
+/*
+
+function FormattedDate(props) {
+  return(
+    <div className="time">
+      {props.date.toLocaleTimeString()}
+      </div>
+    );
+}
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date : new Date()};
+  }
+  
+  componentDidMount() {
+    //this.TimerID = setInterval(() => this.tick(), 1000);
+    this.change();
+  }
+  
+  componentWillUnmount() {
+    alert(1);
+    clearInterval(this.TimerID);
+  }
+  
+  tick() {
+    this.setState({date : new Date()});
+  }
+  
+  change() {
+    
+  }
+  
+  
+  render() {
+    return(
+      <div className="ticking-clock">
+      <h1>The time is</h1>
+      <FormattedDate date={this.state.date}/>
+      </div>
+      );
+  }
+}
+
+
+ReactDOM.render(<Clock/>, document.getElementById("root"));
+  
+*/ 
+
+//CAT AVATAR//  
+  
+/*    
+function CommentDate(props) {
+      return(
+        <div className="comment-date">
+        {props.date.toLocaleDateString()}
+        </div>
+        );
+    }
+    
+    function Avatar(props) {
+      return(
+        <img className="avatar-image" src={props.avatar.avatarUrl}></img>
+        );
+    }
+    
+    function UserInfo(props) {
+      return(
+        <div classsName="user-info">
+        <Avatar avatar={props.user}/>
+        <div className="user-name">{props.user.name}</div>
+        </div>
+        );
+    }
+    
+    function Comment(props) {
+    return(
+      <div className="comment">
+      <UserInfo user={props.author}/>
+      <div className="comment-text">{props.text}</div>
+      <CommentDate date={props.date}/>
+      </div>
+      ); 
+    }
+    
+    const comment = {
+      date : new Date(),
+      text : 'Hey! You are learning React :)',
+      author : {
+        name : "Krishna Vamsi",
+        avatarUrl : 'https://placekitten.com/g/64/64',
+      },
+    };
+    
+    ReactDOM.render(
+      <Comment 
+    date={comment.date}
+    text={comment.text}
+    author={comment.author}
+    />, document.getElementById("root")
+    );
+*/    
+    </script>
+  </body>
+
+</html>
