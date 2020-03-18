@@ -1,0 +1,60 @@
+import React from "react";
+import { ToDo } from './components/to-do-list/toDo';
+import Footer from './components/to-do-list/Footer';
+import './App.css';
+
+let newToDoId = 0;
+
+class ToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toDos: []
+    };
+  }
+
+  onChangeCheckBox = (event) => {
+    const toDoId = event.target.id;
+    
+  }
+
+  addNewToDo = (event) => {
+    if (event.keyCode === 13 && event.target.value !== "") {
+      const toDos = this.state.toDos.slice(0);
+      const newToDo = {
+        toDoId: newToDoId,
+        toDoContent: event.target.value,
+        isChecked: false
+      };
+      toDos.push(newToDo);
+      this.setState({ toDos: toDos });
+      event.target.value = "";
+      newToDoId += 1;
+    }
+  }
+
+  renderToDoList = () => {
+    const { toDos } = this.state;
+    const displayToDos = toDos.map(eachToDo => {
+      return <ToDo toDoId={eachToDo.toDoId} key={eachToDo.toDoId} toDoContent={eachToDo.toDoContent} onChangeCheckBox={this.onChangeCheckBox}/>;
+    });
+    return displayToDos;
+  }
+
+  render() {
+    return (
+      <div className="container">
+            <p className="header">todos</p>
+            <div className="to-do-container">
+                <input type="text" placeholder="Enter new todo" className="user-input" onKeyDown={this.addNewToDo}/>
+                {this.renderToDoList()}
+                <div className="footer">
+                <Footer />
+                </div>
+            </div>
+        </div>
+    );
+  }
+}
+
+export default ToDoList;
